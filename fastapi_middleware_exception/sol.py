@@ -23,10 +23,11 @@ async def log_requests(request: Request, call_next):
 
 @app.get("/hello")
 async def read_root():
-    try:
-        return {"message": "Hello, Welcome to FastAPI!"}
-    except Exception:
-        raise CustomException(name="wrong request")
+    return {"message": "Hello, Welcome to FastAPI!"}
+
+@app.get("/{path:path}")
+async def catch_all(path: str):
+    raise CustomException(name="Invalid endpoint")
 
 
 
